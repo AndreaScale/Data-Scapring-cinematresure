@@ -275,6 +275,23 @@ import pandas
 # #     soup = BeautifulSoup(r.content, "html.parser")
 
 
-v = [1,2,3]
+# v = [1,2,3]
 
-if v!=[] and v[0]==1: print('Hello\nWorld')
+# if v!=[] and v[0]==1: print('Hello\nWorld')
+
+my_cols = ("name", "street_address", "city", "state", "postal_code", "status", "description", "url")
+
+my_data=list()
+
+new_row = (1, 23456, 98765, 21235, 642, 5, 4, 34)
+
+my_data.append(new_row)
+
+new_row = (1, 0, 0, 0, 0, 0, 0, 0)
+
+my_data.append(new_row)
+
+
+df = pandas.DataFrame(data=my_data, columns=my_cols)
+
+df.to_csv("Tocsv.csv", sep=";", index=False)

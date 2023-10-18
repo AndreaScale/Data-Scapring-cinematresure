@@ -67,8 +67,10 @@ with open("cinema_links_v1.csv", "r") as a_file:
                 my_links_accep.append(stripped_line) 
                 print(stripped_line)
 
-            print(my_theater)
-            my_theater += 1
+        print("Theater " + str(my_theater))
+        my_theater += 1
+        time.sleep(3)
+
 
            
 # my_links_check = list(dict.fromkeys(my_links_check))

@@ -3,12 +3,22 @@
 
 import requests
 from bs4 import BeautifulSoup
-# import re
+import re
 import time
-import pandas as pd
+import csv
+import pandas 
+
+def remove_tags(soup): #Removes tags from the description
+ 
+    for data in soup(['style', 'script']):
+        # Remove tags
+        data.decompose()
+ 
+    # return data by retrieving the tag content
+    return ' '.join(soup.stripped_strings)
 
 my_index = 1
-max_results = 29807
+max_results = 13828
 
 url_stub = "http://cinematreasures.org"
 
@@ -22,7 +32,7 @@ my_cols = ("name", "street_address", "city", "state", "postal_code", "status", "
 
 my_data = list()
 
-with open("cinema_links_part_12_v1.csv", "r") as a_file:
+with open("cinema_links_1947_ACCEPT.csv", "r") as a_file:
     for line in a_file:
 
         stripped_line = line.strip()
@@ -81,7 +91,8 @@ with open("cinema_links_part_12_v1.csv", "r") as a_file:
 
         # Description
         try:
-            my_descr = soup.findAll("div", {"id": "description"})[0].contents[1].contents[0]
+            my_descr = soup.findAll("div", {"id": "description"})[0]
+            my_descr = remove_tags(my_descr)
         except:
             my_descr = " "
         # print(my_descr)
@@ -104,8 +115,7 @@ with open("cinema_links_part_12_v1.csv", "r") as a_file:
             break
 
         print("Page " + str(my_index) + " of " + str(max_results))
-        time.sleep(3)
 
-df = pd.DataFrame(data=my_data, columns=my_cols)
+df = pandas.DataFrame(data=my_data, columns=my_cols)
 
-df.to_csv("cinematreasures_raw_part_12_v1.csv", sep=";", index=False)
+df.to_csv("cinematreasures_1947_data.csv", sep=";", index=False)
