@@ -1,8 +1,8 @@
 import geocoder # pip install geocoder
 import pandas
 import numpy
-import plotly.express as px
-import json
+
+
 
 file = pandas.read_excel('cinematreasures_1947_data.xlsx')
 

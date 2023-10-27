@@ -1,1 +1,1 @@
-address
+print(index.value_counts())
